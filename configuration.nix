@@ -2,7 +2,32 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
+
+let
+  # Change this to switch theme variant without logging out.
+  # Available variants: astronaut, black_hole, cyberpunk, hyprland_kath,
+  # jake_the_dog, japanese_aesthetic, pixel_sakura, pixel_sakura_static,
+  # post-apocalyptic_hacker, purple_leaves
+  sddmThemeVariant = "astronaut";
+
+  sddm-astronaut-theme-pkg = pkgs.stdenv.mkDerivation {
+    name = "sddm-astronaut-theme";
+    src = inputs.sddm-astronaut-theme;
+    dontBuild = true;
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/sddm-astronaut-theme
+      cp -r . $out/share/sddm/themes/sddm-astronaut-theme/
+      sed -i "s|^ConfigFile=.*|ConfigFile=Themes/${sddmThemeVariant}.conf|" \
+        $out/share/sddm/themes/sddm-astronaut-theme/metadata.desktop
+    '';
+  };
+
+  sddm-astronaut-fonts = pkgs.runCommand "sddm-astronaut-fonts" { } ''
+    mkdir -p $out/share/fonts/truetype/sddm-astronaut
+    cp -r ${inputs.sddm-astronaut-theme}/Fonts/* $out/share/fonts/truetype/sddm-astronaut/
+  '';
+in
 
 {
   imports =
@@ -107,8 +132,31 @@
   services.gnome.gnome-keyring.enable = true;
   programs.hyprland.enable = true;
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "sddm-astronaut-theme";
+    extraPackages = with pkgs; [
+      qt6Packages.qtsvg
+      qt6Packages.qtmultimedia
+      qt6Packages.qtvirtualkeyboard
+      qt6Packages.qt5compat
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-libav
+    ];
+  };
+
+  environment.variables = {
+    QML_IMPORT_PATH = with pkgs; lib.makeSearchPathOutput "lib" "lib/qt-6/qml" [
+      qt6Packages.qtmultimedia
+      qt6Packages.qtsvg
+      qt6Packages.qtvirtualkeyboard
+      qt6Packages.qt5compat
+    ];
+  };
   services.displayManager.defaultSession = "hyprland";
 
   # programs.firefox.enable = true;
@@ -120,11 +168,12 @@
      kitty
      firefox
      git
+     sddm-astronaut-theme-pkg
   ];
   environment.shells = with pkgs; [ zsh ];
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
-  ];
+  ] ++ [ sddm-astronaut-fonts ];
 
   system.stateVersion = "25.11";
 

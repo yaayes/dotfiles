@@ -138,7 +138,24 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
         "noctalia": "noctalia",
-        "noctalia-qs": "noctalia-qs"
+        "noctalia-qs": "noctalia-qs",
+        "sddm-astronaut-theme": "sddm-astronaut-theme"
+      }
+    },
+    "sddm-astronaut-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765019490,
+        "narHash": "sha256-+94WVxOWfVhIEiVNWwnNBRmN+d1kbZCIF10Gjorea9M=",
+        "owner": "Keyitdev",
+        "repo": "sddm-astronaut-theme",
+        "rev": "d73842c761f7d7859f3bdd80e4360f09180fad41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Keyitdev",
+        "repo": "sddm-astronaut-theme",
+        "type": "github"
       }
     },
     "systems": {

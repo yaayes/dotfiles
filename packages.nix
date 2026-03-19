@@ -31,6 +31,8 @@
     bat
     ripgrep
     alacritty
+    htop
+    btop
 
     # Lock screen & idle
     hyprlock

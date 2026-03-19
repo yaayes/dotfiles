@@ -21,6 +21,11 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+
+    sddm-astronaut-theme = {
+      url = "github:Keyitdev/sddm-astronaut-theme";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, noctalia, noctalia-qs, catppuccin, ... }: {
