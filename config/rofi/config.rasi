@@ -1,0 +1,18 @@
+configuration {
+display-drun: "  Apps";
+display-filebrowser: "  Files";
+display-keys: "  Keys";
+display-run: "  Run";
+drun-display-format: "{name}";
+font: "JetBrainsMono Nerd Font 13";
+kb-mode-next: "Super+Tab";
+kb-mode-previous: "Super+shift+Tab";
+kb-row-tab: "";
+location: 0;
+modi: "drun,run,filebrowser,keys";
+show-icons: true;
+terminal: "kitty";
+xoffset: 0;
+yoffset: 0;
+}
+@import "catppuccin-mocha"

@@ -1,0 +1,35 @@
+[bell]
+animation = "Off"
+
+[cursor.style]
+blinking = "Off"
+shape = "Beam"
+
+[general]
+import = ["~/.config/alacritty/theme.toml"]
+
+[font]
+size = 13
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[scrolling]
+history = 10000
+
+[window]
+decorations = "None"
+opacity = 0.92
+
+[window.padding]
+x = 8
+y = 8

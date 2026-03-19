@@ -1,0 +1,133 @@
+/* ── Global ────────────────────────────────────────── */
+* {
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-size: 13px;
+  min-height: 0;
+  border: none;
+  border-radius: 0;
+}
+
+window#waybar {
+  background: rgba(29, 16, 17, 0.85);
+  color: #F7DCDE;
+}
+
+tooltip {
+  background: rgba(29, 16, 17, 0.95);
+  border: 1px solid rgba(247, 220, 222, 0.2);
+  border-radius: 12px;
+  color: #F7DCDE;
+}
+
+/* ── Left modules ─────────────────────────────────── */
+#workspaces {
+  margin: 4px 4px 4px 8px;
+  padding: 0 2px;
+  background: rgba(247, 220, 222, 0.08);
+  border-radius: 14px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  margin: 2px 1px;
+  color: rgba(247, 220, 222, 0.4);
+  border-radius: 12px;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  color: #F7DCDE;
+  background: rgba(247, 220, 222, 0.12);
+}
+
+#workspaces button.active {
+  color: #1D1011;
+  background: rgba(247, 220, 222, 0.85);
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  color: #1D1011;
+  background: #eba0ac;
+}
+
+#window {
+  margin: 4px 4px;
+  padding: 0 12px;
+  color: rgba(247, 220, 222, 0.7);
+  font-style: italic;
+}
+
+/* ── Center ────────────────────────────────────────── */
+#clock {
+  margin: 4px 4px;
+  padding: 0 14px;
+  background: rgba(247, 220, 222, 0.08);
+  border-radius: 14px;
+  color: #F7DCDE;
+  font-weight: bold;
+}
+
+/* ── Right modules ─────────────────────────────────── */
+#network,
+#cpu,
+#memory,
+#battery,
+#pulseaudio,
+#tray {
+  margin: 4px 2px;
+  padding: 0 10px;
+  background: rgba(247, 220, 222, 0.08);
+  border-radius: 14px;
+  color: #F7DCDE;
+  transition: all 0.2s ease;
+}
+
+#tray {
+  margin-right: 8px;
+}
+
+#network {
+  color: #89dceb;
+}
+
+#cpu {
+  color: #fab387;
+}
+
+#memory {
+  color: #cba6f7;
+}
+
+#battery {
+  color: #a6e3a1;
+}
+
+#battery.warning {
+  color: #f9e2af;
+}
+
+#battery.critical {
+  color: #f38ba8;
+  animation: blink 1s linear infinite;
+}
+
+#battery.charging {
+  color: #a6e3a1;
+}
+
+#pulseaudio {
+  color: #f5c2e7;
+}
+
+#pulseaudio.muted {
+  color: rgba(247, 220, 222, 0.3);
+}
+
+@keyframes blink {
+  to {
+    color: #1D1011;
+    background: #f38ba8;
+  }
+}
