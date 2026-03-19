@@ -20,6 +20,7 @@
     libinput
     libsecret
     zsh
+    oh-my-zsh
     nerd-fonts.jetbrains-mono
     font-awesome
     noto-fonts

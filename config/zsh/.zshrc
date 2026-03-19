@@ -2,6 +2,10 @@
 # On NixOS with home-manager, session vars (XDG_SESSION_TYPE, NIXOS_OZONE_WL,
 # etc.) are written to this file.  Source it early so everything downstream sees
 # them.  On non-NixOS systems the file simply won't exist — no-op.
+# useUserPackages=true (home-manager NixOS module) puts vars here:
+[[ -f "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]] && \
+  source "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh"
+# standalone home-manager puts vars here:
 [[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && \
   source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 

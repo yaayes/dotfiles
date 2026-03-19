@@ -58,6 +58,7 @@ in
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       XCURSOR_THEME = "Bibata-Modern-Classic";
       XCURSOR_SIZE = "24";
+      ZSH = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
     };
 
     imports = [
