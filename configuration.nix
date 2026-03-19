@@ -78,40 +78,6 @@
     allowUnfree = true;
   };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      noctalia-shell = prev.stdenv.mkDerivation {
-        pname = "noctalia-shell";
-        version = "4.5.0";
-        src = prev.fetchzip {
-          url = "https://github.com/noctalia-dev/noctalia-shell/archive/refs/tags/v4.5.0.tar.gz";
-          hash = "sha256-Y5P0RYO9NKxa4UZBoGmmxtz3mEwJrBOfvdLJRGjV2Os=";
-        };
-        buildInputs = [ prev.qt6.qtbase prev.qt6.qtmultimedia ];
-        nativeBuildInputs = [ prev.qt6.wrapQtAppsHook ];
-        dontBuild = true;
-        installPhase = ''
-          runHook preInstall
-          mkdir -p $out/share/noctalia-shell $out/bin
-          ln -s ${prev.quickshell}/bin/qs $out/bin/noctalia-shell
-          cp -R Assets Commons CREDITS.md Helpers Modules Services Shaders Scripts Widgets shell.qml \
-            $out/share/noctalia-shell
-          rm -rf $out/share/noctalia-shell/Assets/Screenshots
-          runHook postInstall
-        '';
-        preFixup = ''
-          qtWrapperArgs+=(
-            --add-flags "-p $out/share/noctalia-shell"
-          )
-        '';
-        meta.mainProgram = "noctalia-shell";
-      };
-    })
-  ];
-
-  # Enable zsh system-wide (required when using it as default shell).
-  programs.zsh.enable = true;
-
   # Define a user account. Don't forget to set a password with 'passwd'.
   users.groups.yassine = {
     gid = 1000;
@@ -121,9 +87,10 @@
      isNormalUser = true;
      uid = 1000;
      group = "yassine";
-     extraGroups = [ "wheel" "networkmanager" "docker" ]; # Enable 'sudo' for the user.
      shell = pkgs.zsh;
+     extraGroups = [ "wheel" "networkmanager" "docker" ];
   };
+  programs.zsh.enable = true;
 
   virtualisation.docker = {
     enable = true;
@@ -153,20 +120,12 @@
      kitty
      firefox
      git
-    #  waybar
-    #  wofi
-    #  home-manager
-    #  zsh
-    #  libsecret  # required for VS Code gnome-libsecret password store
-    #  noctalia-shell  # pinned as GC root — survives nix-collect-garbage
   ];
   environment.shells = with pkgs; [ zsh ];
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
-  # Prevent the new user dialog in zsh
-  system.userActivationScripts.zshrc = "touch .zshrc";
 
-  system.stateVersion = "25.11"; # Did you read the comment?
+  system.stateVersion = "25.11";
 
 }

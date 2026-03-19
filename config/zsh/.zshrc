@@ -1,3 +1,10 @@
+# ── Home-Manager session variables ────────────────────────────────────────────
+# On NixOS with home-manager, session vars (XDG_SESSION_TYPE, NIXOS_OZONE_WL,
+# etc.) are written to this file.  Source it early so everything downstream sees
+# them.  On non-NixOS systems the file simply won't exist — no-op.
+[[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && \
+  source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
 # ── Oh-My-Zsh ────────────────────────────────────────────────────────────────
 # Works on NixOS (ZSH set by home-manager) and any distro with oh-my-zsh
 # installed at ~/.oh-my-zsh or via $ZSH environment variable.

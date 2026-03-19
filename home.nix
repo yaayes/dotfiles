@@ -92,12 +92,12 @@ in
       systemd.enable = false;
     };
 
-    # ── Zsh + Oh-My-Zsh ───────────────────────────────────────
-    # Config lives in config/zsh/.zshrc — a portable file that works on any
-    # distro. On NixOS: programs.zsh installs everything, home.file symlinks
-    # ~/.zshrc, and the catppuccin theme is pre-placed so curl never fires.
-    programs.zsh.enable = true;
-    programs.zsh.oh-my-zsh.enable = true;
+    # ── Zsh ─────────────────────────────────────────────────
+    # The actual .zshrc lives in config/zsh/.zshrc — a portable file that
+    # works on any distro.  We simply symlink it into ~/ so edits are live.
+    # System-level configuration.nix sets zsh as the login shell.
+    home.file.".zshrc".source =
+      config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config/zsh/.zshrc";
 
     # ── Config symlinks (generated from configLinks above) ────
     xdg.configFile = lib.mapAttrs (dest: src: {

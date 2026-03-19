@@ -35,7 +35,7 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            backupFileExtension = "backup";
+            backupFileExtension = "hm-bak";
             extraSpecialArgs = { inherit inputs; };
             users.yassine = { imports = [ ./home.nix catppuccin.homeModules.catppuccin ]; };
           };
