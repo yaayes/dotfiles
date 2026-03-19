@@ -25,5 +25,120 @@
   base: #1e1e2e;
   mantle: #181825;
   crust: #11111b;
+
+  background-color: @base;
+  border-color:     @mauve;
+  text-color:       @text;
+}
+
+window {
+  background-color: @base;
+  border:           2px;
+  border-color:     @mauve;
+  border-radius:    8px;
+  width:            600px;
+  padding:          8px;
+}
+
+mainbox {
+  background-color: @base;
+  spacing:          8px;
+  padding:          8px;
+  children:         [ inputbar, listview ];
+}
+
+inputbar {
+  background-color: @surface0;
+  border-radius:    8px;
+  padding:          8px 12px;
+  spacing:          8px;
+  children:         [ prompt, entry ];
+}
+
+prompt {
+  background-color: @surface0;
+  text-color:       @mauve;
+  padding:          0;
+}
+
+entry {
+  background-color: @surface0;
+  text-color:       @text;
+  placeholder-color: @subtext0;
+  placeholder:      "Search...";
+  cursor:           text;
+}
+
+listview {
+  background-color: @base;
+  padding:          4px 0;
+  lines:            10;
+  columns:          1;
+  scrollbar:        false;
+}
+
+element {
+  background-color: @base;
+  border-radius:    4px;
+  padding:          8px 12px;
+  spacing:          8px;
+  text-color:       @text;
+  children:         [ element-icon, element-text ];
+}
+
+element normal.normal {
+  background-color: @base;
+  text-color:       @text;
+}
+
+element normal.urgent {
+  background-color: @base;
+  text-color:       @red;
+}
+
+element normal.active {
+  background-color: @base;
+  text-color:       @green;
+}
+
+element alternate.normal {
+  background-color: @base;
+  text-color:       @text;
+}
+
+element alternate.urgent {
+  background-color: @base;
+  text-color:       @red;
+}
+
+element alternate.active {
+  background-color: @base;
+  text-color:       @green;
+}
+
+element selected.normal {
+  background-color: @surface0;
+  text-color:       @mauve;
+}
+
+element selected.urgent {
+  background-color: @surface0;
+  text-color:       @red;
+}
+
+element selected.active {
+  background-color: @surface0;
+  text-color:       @green;
+}
+
+element-icon {
+  background-color: inherit;
+  size:             24px;
+}
+
+element-text {
+  background-color: inherit;
+  text-color:       inherit;
+  highlight:        inherit;
 }
 
