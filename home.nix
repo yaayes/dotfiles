@@ -80,11 +80,10 @@ in
       };
     };
 
-    # ── Hyprlock / Hypridle / Hyprland ─────────────────────────
+    # ── Hyprland ────────────────────────────────────────────────
     # Config files live in ./config/hypr/ (symlinked via configLinks).
     # Theme colors come from hypr/mocha.conf (fetched via hyprlandTheme).
-    programs.hyprlock.enable = true;
-    services.hypridle.enable = true;
+    # Idle management and lock screen are handled by noctalia-shell.
 
     wayland.windowManager.hyprland = {
       enable = true;
