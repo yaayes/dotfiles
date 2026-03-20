@@ -108,5 +108,8 @@ in
       # (zsh dir is not in configLinks so we handle it explicitly)
       "zsh/catppuccin-syntax.zsh".source =
         config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config/zsh/catppuccin-syntax.zsh";
+
+      "chrome-flags.conf".source =
+        config.lib.file.mkOutOfStoreSymlink "${dotfiles}/config/chrome/chrome-flags.conf";
     };
 }

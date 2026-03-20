@@ -86,6 +86,14 @@ in
   # Enable touchpad support via libinput (required for multi-touch gestures).
   services.libinput.enable = true;
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver   # VA-API for CometLake (Gen 9.5+)
+      intel-compute-runtime
+    ];
+  };
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
