@@ -222,29 +222,42 @@
                 },
                 {
                     "defaultSettings": {
+                        "batteryDevice": "/sys/class/power_supply/BAT0",
+                        "chargeThreshold": 80
+                    },
+                    "id": "plugin:battery-threshold"
+                },
+                {
+                    "defaultSettings": {
+                        "enableCross": true,
+                        "enableWindowsSelection": true,
+                        "screenshotEditor": "swappy"
+                    },
+                    "id": "plugin:screen-shot-and-record"
+                },
+                {
+                    "defaultSettings": {
                         "audioCodec": "opus",
                         "audioSource": "default_output",
                         "colorRange": "limited",
                         "copyToClipboard": false,
+                        "customReplayDuration": "30",
                         "directory": "",
                         "filenamePattern": "recording_yyyyMMdd_HHmmss",
                         "frameRate": "60",
                         "hideInactive": false,
                         "iconColor": "none",
                         "quality": "very_high",
+                        "replayDuration": "30",
+                        "replayEnabled": false,
+                        "replayStorage": "ram",
                         "resolution": "original",
+                        "restorePortalSession": false,
                         "showCursor": true,
                         "videoCodec": "h264",
                         "videoSource": "portal"
                     },
                     "id": "plugin:screen-recorder"
-                },
-                {
-                    "defaultSettings": {
-                        "batteryDevice": "/sys/class/power_supply/BAT0",
-                        "chargeThreshold": 80
-                    },
-                    "id": "plugin:battery-threshold"
                 }
             ]
         }
@@ -371,11 +384,11 @@
         "inactiveIndicators": false,
         "indicatorColor": "primary",
         "indicatorOpacity": 0.6,
-        "indicatorThickness": 3,
+        "indicatorThickness": 6,
         "launcherIcon": "",
         "launcherIconColor": "none",
         "launcherPosition": "end",
-        "launcherUseDistroLogo": false,
+        "launcherUseDistroLogo": true,
         "monitors": [
         ],
         "onlySameOutput": true,
@@ -384,14 +397,14 @@
         "pinnedStatic": false,
         "position": "bottom",
         "showDockIndicator": false,
-        "showLauncherIcon": false,
+        "showLauncherIcon": true,
         "sitOnFrame": false,
         "size": 1
     },
     "general": {
         "allowPanelsOnScreenWithoutBar": true,
         "allowPasswordWithFprintd": false,
-        "animationDisabled": false,
+        "animationDisabled": true,
         "animationSpeed": 1,
         "autoStartAuth": false,
         "avatarImage": "/home/yassine/.face",
@@ -621,6 +634,13 @@
                 "command": "",
                 "countdownEnabled": true,
                 "enabled": true,
+                "keybind": "7"
+            },
+            {
+                "action": "userspaceReboot",
+                "command": "",
+                "countdownEnabled": true,
+                "enabled": false,
                 "keybind": ""
             }
         ],
