@@ -22,13 +22,18 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sddm-astronaut-theme = {
       url = "github:Keyitdev/sddm-astronaut-theme";
       flake = false;
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, noctalia, noctalia-qs, catppuccin, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, noctalia, noctalia-qs, catppuccin, zen-browser, ... }: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };

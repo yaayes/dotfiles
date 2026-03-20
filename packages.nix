@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   home.packages = with pkgs; [
     waybar
     rofi
@@ -51,5 +51,8 @@
 
     # Audio effects
     easyeffects
+
+    # Browser
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
