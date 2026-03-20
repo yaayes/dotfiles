@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,24 +33,40 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, noctalia, noctalia-qs, catppuccin, zen-browser, ... }: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        noctalia.nixosModules.default
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "hm-bak";
-            extraSpecialArgs = { inherit inputs; };
-            users.yassine = { imports = [ ./home.nix catppuccin.homeModules.catppuccin ]; };
-          };
-        }
-      ];
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      noctalia,
+      noctalia-qs,
+      catppuccin,
+      zen-browser,
+      ...
+    }:
+    {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          noctalia.nixosModules.default
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "hm-bak";
+              extraSpecialArgs = { inherit inputs; };
+              users.yassine = {
+                imports = [
+                  ./home.nix
+                  catppuccin.homeModules.catppuccin
+                ];
+              };
+            };
+          }
+        ];
+      };
     };
-  };
 }

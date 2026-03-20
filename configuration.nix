@@ -2,7 +2,13 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   # Change this to switch theme variant without logging out.
@@ -30,16 +36,19 @@ let
 in
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Enable SMBus/RMI multi-touch path for Synaptics touchpad so libinput
   # receives proper multi-touch events (required for 3-finger gestures).
@@ -79,8 +88,8 @@ in
   # services.pulseaudio.enable = true;
   # OR
   services.pipewire = {
-     enable = true;
-     pulse.enable = true;
+    enable = true;
+    pulse.enable = true;
   };
 
   # Enable touchpad support via libinput (required for multi-touch gestures).
@@ -89,7 +98,7 @@ in
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-media-driver   # VA-API for CometLake (Gen 9.5+)
+      intel-media-driver # VA-API for CometLake (Gen 9.5+)
       intel-compute-runtime
     ];
   };
@@ -99,7 +108,7 @@ in
     powerOnBoot = true;
     settings = {
       General = {
-        Experimental = true;  # battery reporting for BT devices
+        Experimental = true; # battery reporting for BT devices
       };
     };
   };
@@ -117,11 +126,15 @@ in
   };
 
   users.users.yassine = {
-     isNormalUser = true;
-     uid = 1000;
-     group = "yassine";
-     shell = pkgs.zsh;
-     extraGroups = [ "wheel" "networkmanager" "docker" ];
+    isNormalUser = true;
+    uid = 1000;
+    group = "yassine";
+    shell = pkgs.zsh;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+    ];
   };
   programs.zsh.enable = true;
 
@@ -131,7 +144,7 @@ in
   };
 
   security.sudo.wheelNeedsPassword = true;
-  security.rtkit.enable= true;
+  security.rtkit.enable = true;
 
   # Start gnome-keyring via PAM on login so GNOME_KEYRING_CONTROL is set
   # correctly and VS Code can use it for encryption key storage.
@@ -158,12 +171,14 @@ in
   };
 
   environment.variables = {
-    QML_IMPORT_PATH = with pkgs; lib.makeSearchPathOutput "lib" "lib/qt-6/qml" [
-      qt6Packages.qtmultimedia
-      qt6Packages.qtsvg
-      qt6Packages.qtvirtualkeyboard
-      qt6Packages.qt5compat
-    ];
+    QML_IMPORT_PATH =
+      with pkgs;
+      lib.makeSearchPathOutput "lib" "lib/qt-6/qml" [
+        qt6Packages.qtmultimedia
+        qt6Packages.qtsvg
+        qt6Packages.qtvirtualkeyboard
+        qt6Packages.qt5compat
+      ];
   };
   services.displayManager.defaultSession = "hyprland";
 
@@ -172,16 +187,19 @@ in
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-     vim
-     kitty
-     firefox
-     git
-     sddm-astronaut-theme-pkg
+    vim
+    kitty
+    firefox
+    git
+    sddm-astronaut-theme-pkg
   ];
   environment.shells = with pkgs; [ zsh ];
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ] ++ [ sddm-astronaut-fonts ];
+  fonts.packages =
+    with pkgs;
+    [
+      nerd-fonts.jetbrains-mono
+    ]
+    ++ [ sddm-astronaut-fonts ];
 
   system.stateVersion = "25.11";
 

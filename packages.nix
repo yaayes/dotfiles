@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   home.packages = with pkgs; [
     waybar
     rofi
@@ -33,6 +34,10 @@
     alacritty
     htop
     btop
+    nwg-displays
+    gpu-screen-recorder
+    direnv
+    nixfmt
 
     # Lock screen & idle
     hyprlock
